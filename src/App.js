@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Search from './Search';
+import Menu from './Menu';
 
 function App() {
   return (
@@ -10,7 +11,12 @@ function App() {
       </header>
       <section>
         <div>
-          <Search />
+          {/*<Search />*/}
+        </div>
+      </section>
+      <section>
+        <div>
+          <Menu />
         </div>
       </section>
     </div>
