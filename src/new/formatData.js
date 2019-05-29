@@ -2,7 +2,6 @@ import * as data from '../categories.json';
  
 const jsonData = data.default;
 
-
 const formatData = [];
 
 const findParent = (parent, child) => {
@@ -13,7 +12,6 @@ const findParent = (parent, child) => {
       } else {
         jsonData[idx].subcategory = [{ ...jsonData[child] }];
       }
-      // break;
     }
   } 
 };

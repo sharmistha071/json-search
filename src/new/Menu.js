@@ -8,15 +8,15 @@ const Menu = () => (
       {formatData.map((item, index) => {
         if(item.hasOwnProperty('subcategory')){
           return (
-            <li key={index}>{item.Name}->
+            <li value={item.Id} key={index}>{item.Name}->
               <ul>
                 {item.subcategory.map((item, index)=>{
                   return (
-                    <li key={index}>{item.Name}
+                    <li value={item.Id} key={index}>{item.Name}
                       {item.subcategory && (
                         <ul>
                           {item.subcategory.map((item, index)=>{
-                            return <li key={index}>{item.Name}</li>
+                            return <li value={item.Id} key={index}>{item.Name}</li>
                           })}
                         </ul>
                       )}

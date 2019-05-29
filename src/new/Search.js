@@ -1,63 +1,47 @@
 import React, {Component} from "react";
-import formatData from './formatData';
+import * as data from '../categories.json';
+const searchData = data.default;
 
 class Search extends Component{
   constructor(props){
     super(props);
-    this.state={
-      searchVal: ''
-    }
+    this.state={}
     this.onChangeSearchValue = this.onChangeSearchValue.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.searchNew = this.searchNew.bind(this);
+    this.highlightSeachvalue = this.highlightSeachvalue.bind(this)
   }
   onChangeSearchValue(value){
     this.setState({searchVal: value});
-    // console.log(this.handleSearch(formatData, 'Name', value));
-    // let result = this.handleSearch(formatData, 'Name', value);
-    // console.log('result', result);
-    this.searchNew(value)
-    
+    this.handleSearch(value)
   }
 
-  searchNew(searchText){
-    let searchlist =  formatData.filter(
-      item => item.Name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-        || item.Name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-    );
-
-     console.log(searchlist);
-    for(let i= 0; i<searchlist.length; i++){
-      let activeIndex = searchlist[i].Id;
-      let item = document.querySelectorAll('li');
-      console.log(item)
-      for(let idx = 0; idx <item.length; idx++){
-        if(activeIndex === idx){
-          console.log('activeindex', item[activeIndex], activeIndex)
-          
-        }
+  handleSearch(searchText){
+    let pattern = new RegExp(searchText, 'gi')
+    let searchList = searchData.filter((item) => {
+      return ( 
+        item.Name.match(pattern)
+        );
       }
-    }
+    );
+    
+    this.highlightSeachvalue(searchList)
   }
 
-  handleSearch(obj, key, value){
-    if(value===obj[key]) {
-      return obj;
-    } else {
-      for (var i = 0, len = Object.keys(obj).length; i < len; i++) {
-        if (typeof obj[i] == 'object') {
-          var found = this.handleSearch(obj[i], key, value);
-          if (found) {
-            // If the object was found in the recursive call, bubble it up.
-            return found;
-          }
+  highlightSeachvalue(searchList){
+    for(let i = 0; i<searchList.length; i++){
+      let item = document.querySelectorAll('li');
+      for(let idx = 0; idx<item.length; idx++){
+        if(item[idx].value === searchList[i].Id){
+          item[idx].style.color = "red";
+        }else{
+          item[idx].style.color = "";
         }
       }
     }
   }
   
+  
   render(){
-    // console.log(this.state)
     return(
       <div>
         <input type="text" onChange={(e)=>this.onChangeSearchValue(e.target.value)}/>

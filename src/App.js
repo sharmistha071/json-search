@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Search from './new/Search';
 import Menu from './new/Menu';
-// import Menu from './Menu';
 
 function App() {
   return (
