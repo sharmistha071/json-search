@@ -10,8 +10,8 @@ class Search extends Component{
     this.handleSearch = this.handleSearch.bind(this);
     this.highlightSeachvalue = this.highlightSeachvalue.bind(this)
   }
+
   onChangeSearchValue(value){
-    this.setState({searchVal: value});
     this.handleSearch(value)
   }
 
@@ -28,16 +28,16 @@ class Search extends Component{
   }
 
   highlightSeachvalue(searchList){
-    for(let i = 0; i<searchList.length; i++){
-      let item = document.querySelectorAll('li');
-      for(let idx = 0; idx<item.length; idx++){
-        if(item[idx].value === searchList[i].Id){
-          item[idx].style.color = "red";
+    searchList.forEach(element => {
+      let listItem = document.querySelectorAll('li');
+      listItem.forEach(item => {
+        if(item.value === element.Id){
+          item.style.color = "red";
         }else{
-          item[idx].style.color = "";
+          item.style.color = "";
         }
-      }
-    }
+      });
+    });
   }
   
   

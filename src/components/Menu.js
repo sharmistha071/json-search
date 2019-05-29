@@ -1,6 +1,5 @@
 import React from "react";
-import formatData from './formatData';
-console.log(formatData)
+import formatData from '../functions/formatData';
 
 const Menu = () => (
   <div>
