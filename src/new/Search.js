@@ -9,15 +9,39 @@ class Search extends Component{
     }
     this.onChangeSearchValue = this.onChangeSearchValue.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.searchNew = this.searchNew.bind(this);
   }
   onChangeSearchValue(value){
     this.setState({searchVal: value});
-    console.log(this.handleSearch(formatData, 'Name', value));
+    // console.log(this.handleSearch(formatData, 'Name', value));
+    // let result = this.handleSearch(formatData, 'Name', value);
+    // console.log('result', result);
+    this.searchNew(value)
+    
   }
+
+  searchNew(searchText){
+    let searchlist =  formatData.filter(
+      item => item.Name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+        || item.Name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+    );
+
+     console.log(searchlist);
+    for(let i= 0; i<searchlist.length; i++){
+      let activeIndex = searchlist[i].Id;
+      let item = document.querySelectorAll('li');
+      console.log(item)
+      for(let idx = 0; idx <item.length; idx++){
+        if(activeIndex === idx){
+          console.log('activeindex', item[activeIndex], activeIndex)
+          
+        }
+      }
+    }
+  }
+
   handleSearch(obj, key, value){
-    // console.log(obj, key, value)
-    let text = obj[key];
-    if (text.match(/Home/)) {
+    if(value===obj[key]) {
       return obj;
     } else {
       for (var i = 0, len = Object.keys(obj).length; i < len; i++) {
