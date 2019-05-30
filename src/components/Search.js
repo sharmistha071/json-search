@@ -32,9 +32,9 @@ class Search extends Component{
       let listItem = document.querySelectorAll('li');
       listItem.forEach(item => {
         if(item.value === element.Id){
-          item.style.color = "red";
+          item.firstChild.style.color = 'red';
         }else{
-          item.style.color = "";
+          item.firstChild.style.color = 'red';
         }
       });
     });

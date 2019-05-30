@@ -1,5 +1,6 @@
 import React from "react";
 import formatData from '../functions/formatData';
+console.log(formatData)
 
 const Menu = () => (
   <div>
@@ -19,7 +20,6 @@ const Menu = () => (
                           })}
                         </ul>
                       )}
-                      
                     </li>  
                    )
                 })}
@@ -27,7 +27,7 @@ const Menu = () => (
             </li>
           )
         }else {
-          return <li key={index}>{item.Name}</li>
+          return <li value={item.Id} key={index}>{item.Name}-></li>
         }
       })}
     </ul>
