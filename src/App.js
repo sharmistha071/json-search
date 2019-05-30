@@ -7,8 +7,8 @@ function App() {
   return (
     <div className="App">
       <section>
-        <div>
-          <span>Search Here</span><Search />
+        <div className="SearchSection">
+          <Search />
         </div>
       </section>
       <section>

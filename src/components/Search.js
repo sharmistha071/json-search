@@ -44,7 +44,7 @@ class Search extends Component{
   render(){
     return(
       <div>
-        <input type="text" onChange={(e)=>this.onChangeSearchValue(e.target.value)}/>
+        <input type="text" onChange={(e)=>this.onChangeSearchValue(e.target.value)} placeholder="Search here"/>
       </div>
     )
   }

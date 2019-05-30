@@ -23,9 +23,8 @@
   color: #61dafb;
 }
 
-ui{
-  list-style-type: none;
-  padding: 0px;
+.SearchSection{
+  margin: 30px 0 0 30px;
 }
 
 @keyframes App-logo-spin {
