@@ -1,5 +1,5 @@
 import React from "react";
-import formatData from '../functions/formatData';
+
 
 const generateUIItem = (obj) => {
   return (
@@ -18,10 +18,13 @@ const generateUIItem = (obj) => {
   )
 }
 
-const Menu = () => (
-  <div>
-    {generateUIItem(formatData)}
-  </div>
-)
+const Menu = (props) => {
+  console.log(props);
+  return(
+    <div>
+      {generateUIItem(props.menuItems)}
+    </div>
+  )
+  }
 
 export default Menu;

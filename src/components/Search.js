@@ -1,64 +1,14 @@
-import React, {Component} from "react";
-import * as data from '../categories.json';
-const searchData = data.default;
+import React from "react";
 
-class Search extends Component{
-  constructor(props){
-    super(props);
-    this.state={}
-    this.onChangeSearchValue = this.onChangeSearchValue.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.highlightSeachvalue = this.highlightSeachvalue.bind(this)
-  }
 
-  /**
-   * On search input field change value
-   * @param {String} value user typed value
-   */
-  onChangeSearchValue(value){
-    this.handleSearch(value)
-  }
-
-  /**
-   * On search text match pattern
-   * @param {String} searchText user typed value
-   */
-  handleSearch(searchText){
-    let pattern = new RegExp(searchText, 'gi')
-    let searchList = searchData.filter((item) => {
-      return ( 
-        item.Name.match(pattern)
-      );
-      }
-    );
-    this.highlightSeachvalue(searchList)
-  }
-
-  /**
-   * Highlight match pattern
-   * @param {Array} searchList search result matched list
-   */
-  highlightSeachvalue(searchList){
-    searchList.forEach(element => {
-      let listItem = document.querySelectorAll('li');
-      listItem.forEach(item => {
-        if(item && item.value === element.Id){
-          item.style.color = 'red';
-        }else {
-          item.style.color = '';
-        }
-      });
-    });
-  }
-  
-  
-  render(){
-    return(
-      <div>
-        <input type="text" onChange={(e)=>this.onChangeSearchValue(e.target.value)} placeholder="Search here"/>
-      </div>
-    )
-  }
-}
+const Search = (props) => (
+  <div>
+    <input
+      type="text"
+      onChange={props.onChange}
+      placeholder="Search here"
+    />
+  </div>
+)
 
 export default Search;
