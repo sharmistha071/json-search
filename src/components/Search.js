@@ -20,10 +20,9 @@ class Search extends Component{
     let searchList = searchData.filter((item) => {
       return ( 
         item.Name.match(pattern)
-        );
+      );
       }
     );
-    
     this.highlightSeachvalue(searchList)
   }
 
@@ -31,10 +30,10 @@ class Search extends Component{
     searchList.forEach(element => {
       let listItem = document.querySelectorAll('li');
       listItem.forEach(item => {
-        if(item.value === element.Id){
-          item.firstChild.style.color = 'red';
-        }else{
-          item.firstChild.style.color = 'red';
+        if(item && item.value === element.Id){
+          item.style.color = 'red';
+        }else {
+          item.style.color = '';
         }
       });
     });
