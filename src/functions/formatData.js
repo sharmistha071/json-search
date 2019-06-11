@@ -4,6 +4,12 @@ const jsonData = data.default;
 
 const formatData = [];
 
+/**
+ * Find parent, if item is parent then push it under subcategory of parent
+ * @param {Number} parent ParentCategoryId 
+ * @param {Number} child id
+ */
+
 const findParent = (parent, child) => {
   for (let idx = 0; idx < jsonData.length; idx++) {
     if (parent === jsonData[idx].Id) {

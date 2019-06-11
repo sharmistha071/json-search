@@ -11,10 +11,18 @@ class Search extends Component{
     this.highlightSeachvalue = this.highlightSeachvalue.bind(this)
   }
 
+  /**
+   * On search input field change value
+   * @param {String} value user typed value
+   */
   onChangeSearchValue(value){
     this.handleSearch(value)
   }
 
+  /**
+   * On search text match pattern
+   * @param {String} searchText user typed value
+   */
   handleSearch(searchText){
     let pattern = new RegExp(searchText, 'gi')
     let searchList = searchData.filter((item) => {
@@ -26,6 +34,10 @@ class Search extends Component{
     this.highlightSeachvalue(searchList)
   }
 
+  /**
+   * Highlight match pattern
+   * @param {Array} searchList search result matched list
+   */
   highlightSeachvalue(searchList){
     searchList.forEach(element => {
       let listItem = document.querySelectorAll('li');
