@@ -24,12 +24,13 @@ class App extends Component {
    * @memberof App
    */
   changeSearchValue(event) {
+    const { initialItems } = this.state;
     this.setState(
       {
         searchText: event.target.value
       },
       () => {
-        this.handleSearch();
+        this.handleSearch(initialItems);
       }
     );
   }
@@ -38,10 +39,10 @@ class App extends Component {
    * Handle search functionality 
    * @memberof App
    */
-  handleSearch() {
+  
+  handleSearch(filteredList) {
     const { searchText } = this.state;
     let pattern = new RegExp(searchText, "gi");
-    let filteredList  = this.state.initialItems;
     let newList = [];
 
     filteredList.forEach(item => {
