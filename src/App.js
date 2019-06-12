@@ -1,72 +1,93 @@
-import React, { Component } from 'react';
-import './App.css';
-import formatData from './functions/formatData';
-import Search from './components/Search';
-import Menu from './components/Menu';
+import React, { Component } from "react";
+import "./App.css";
+import formatData from "./functions/formatData";
+import Search from "./components/Search";
+import Menu from "./components/Menu";
 
-const menuData = formatData;
-
-
+//let newList = [];
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       initialItems: formatData,
-      menuData: []
-    }
-    this.onChangeSearchValue = this.onChangeSearchValue.bind(this);
+      menuData: [],
+      searchText: ""
+    };
+    this.changeSearchValue = this.changeSearchValue.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
+
   /**
-   * On search input field change value
-   * @param {String} value user typed value
+   * Change search value in state
+   * @param { Object } event  keyborad event
+   * @memberof App
    */
-  onChangeSearchValue(value) {
-    this.handleSearch(value);
+  changeSearchValue(event) {
+    this.setState(
+      {
+        searchText: event.target.value
+      },
+      () => {
+        this.handleSearch();
+      }
+    );
   }
+
   /**
-   * On search text match pattern
-   * @param {Object} event keyboard event
+   * Handle search functionality 
+   * @memberof App
    */
-  handleSearch(event) {
-    let searchText = event.target.value
+  handleSearch() {
+    const { searchText } = this.state;
     let pattern = new RegExp(searchText, "gi");
     let filteredList  = this.state.initialItems;
-    filteredList = filteredList.filter(item => {
+    let newList = [];
+
+    filteredList.forEach(item => {
       if(item.hasOwnProperty('subcategory')){
-        item.subcategory.filter(item => {
-          console.log(item)
-          return item.Name.match(pattern);
-        })
-      }else {
-        return item.Name.match(pattern);
+        item.subcategory.forEach((item) => {
+          if(item.Name.match(pattern)){
+            if(item.hasOwnProperty('subcategory')){
+              item.subcategory.forEach((item) => {
+                if(item.Name.match(pattern)){
+                  newList.push(item)
+                }
+              });
+            }
+            newList.push(item);
+          }
+        })        
+      }
+      if(item.Name.match(pattern)){
+        newList.push(item)
       }
     });
-   
-    this.setState({menuData: filteredList});
-    console.log(this.state.menuData);
+    this.setState({menuData: newList});
+    if(searchText === ''){
+      this.setState({menuData: this.state.initialItems});
+    }
   }
 
-  componentDidMount(){
-    this.setState({menuData: formatData})
+  componentDidMount() {
+    this.setState({ menuData: formatData });
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="App">
         <section>
           <div className="SearchSection">
-            <Search onChange={this.onChangeSearchValue} />
+            <Search onChange={this.changeSearchValue} />
           </div>
         </section>
         <section>
           <div>
             <Menu menuItems={this.state.menuData} />
           </div>
-        </section> 
+        </section>
       </div>
-    )
+    );
   }
 }
 

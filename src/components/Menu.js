@@ -19,7 +19,6 @@ const generateUIItem = (obj) => {
 }
 
 const Menu = (props) => {
-  console.log(props);
   return(
     <div>
       {generateUIItem(props.menuItems)}
